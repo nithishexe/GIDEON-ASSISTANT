@@ -14,6 +14,7 @@ import randfacts
 from selenium.common.exceptions import NoSuchElementException
 from random import randint
 import time
+
 file='todo.txt'
 def speak(s):
     language='en'
@@ -47,9 +48,9 @@ def weather():
     url='https://www.google.com/search?q=weather+'+str(city)+''
     op=webdriver.ChromeOptions();
     op.add_argument('headless');
-    driver=webdriver.Chrome(options=op)
+    driver=webdriver.Chrome("D:\Coding\coolProjects\chromedriver.exe", options=op)
     driver.get(url)
-    w=driver.find_element_by_xpath('//*[@id="wob_tm"]').text
+    w=driver.find_element("xpath",'//*[@id="wob_tm"]').text
     w+="°C"
     f="weather in "+str(city)+" is "+str(w)
     speak(f)
@@ -66,7 +67,7 @@ def joke():
 def boring():
     a="Haha! I'm sorry to dissapoint you but this is the best I can do"
     speak(a)
-
+ 
 def facts():
     x=randfacts.get_fact()
     speak(x)
@@ -75,7 +76,7 @@ def question(q):
     print(q)
     op=webdriver.ChromeOptions()
     op.add_argument('headless')
-    driver=webdriver.Chrome(options=op)
+    driver=webdriver.Chrome("D:\Coding\coolProjects\chromedriver.exe", options=op)
     url='https://www.google.com/search?q='+str(q)
     driver.get(url)
     driver.implicitly_wait(10)
@@ -85,10 +86,10 @@ def question(q):
             speak(a)
         except NoSuchElementException:
             try:
-                a=driver.find_element_by_xpath('//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
+                a=driver.find_element("xpath",'//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
                 speak(a)
             except NoSuchElementException:
-                a="sorry I do not know that"
+                a="sorry I do not know that" 
                 speak(a)
         driver.close()   
     elif("what" in q):
@@ -97,7 +98,7 @@ def question(q):
             speak(a)
         except NoSuchElementException:
             try:
-                a=driver.find_element_by_xpath('//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
+                a=driver.find_element("xpath",'//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
                 speak(a)
             except NoSuchElementException:
                 a="sorry I do not know that"
@@ -109,7 +110,7 @@ def question(q):
             speak(a)
         except NoSuchElementException:
             try:
-                a=driver.find_element_by_xpath('//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
+                a=driver.find_element("xpath",'//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
                 speak(a)
             except NoSuchElementException:
                 a="sorry I do not know that"
@@ -121,7 +122,7 @@ def question(q):
             speak(a)
         except NoSuchElementException:
             try:
-                a=driver.find_element_by_xpath('//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
+                a=driver.find_element("xpath",'//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
                 speak(a)
             except NoSuchElementException:
                 a="sorry I do not know that"
@@ -129,7 +130,7 @@ def question(q):
             driver.close()
     else:
         try:
-            a=driver.find_element_by_xpath('//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
+            a=driver.find_element("xpath",'//*[@id="kp-wp-tab-overview"]/div[1]/div/div/div/div/div[1]/div/div/div/span[1]').text
             speak(a)
         except NoSuchElementException:
             a="sorry I do not know that"
@@ -138,12 +139,12 @@ def question(q):
 def news():
     op=webdriver.ChromeOptions()
     op.add_argument('headless')
-    driver=webdriver.Chrome(options=op)
+    driver=webdriver.Chrome("D:\Coding\coolProjects\chromedriver.exe", options=op)
     url='https://indianexpress.com/latest-news/'
     driver.get(url)
     driver.implicitly_wait(10)
     for i in range(1,5):
-        n=driver.find_element_by_xpath('//*[@id="section"]/div/div/div[1]/div[2]/div['+str(i)+']/div[3]').text
+        n=driver.find_element("xpath",'//*[@id="section"]/div/div/div[1]/div[2]/div['+str(i)+']/div[3]').text
         speak(n)
 def toss():
     p=randint(-10,10)
@@ -154,11 +155,11 @@ def toss():
 def covid():
     op=webdriver.ChromeOptions()
     op.add_argument('headless')
-    driver=webdriver.Chrome(options=op)
+    driver=webdriver.Chrome("D:\Coding\coolProjects\chromedriver.exe", options=op)
     url='https://www.google.com/search?q=covid+india'
     driver.get(url)
-    tot_cases=driver.find_element_by_xpath('//*[@id="kEEOx"]/div[2]/div[1]/div/div[1]/table/tbody/tr/td[1]/div[2]/div[1]/span').text
-    tot_deaths=driver.find_element_by_xpath('//*[@id="kEEOx"]/div[2]/div[1]/div/div[1]/table/tbody/tr/td[2]/div[2]/div[1]/span').text
+    tot_cases=driver.find_element("xpath",'//*[@id="kEEOx"]/div[2]/div[1]/div/div[1]/table/tbody/tr/td[1]/div[2]/div[1]/span').text
+    tot_deaths=driver.find_element("xpath",'//*[@id="kEEOx"]/div[2]/div[1]/div/div[1]/table/tbody/tr/td[2]/div[2]/div[1]/span').text
     a="As of today there are "+tot_cases+" total cases and "+tot_deaths+" total deaths in India."
     speak(a)
 def createList():
@@ -186,7 +187,7 @@ f=1
 while(1):
     if(f==1):
         time.sleep(5)
-        speak("Hey whats up!, I am Gideon, A desktop assistant made by team segmentation fault")
+        speak("Hey whats up!, I am Gideon, A desktop assistant made by nithish")
         f=0
     a=""
     a=listen()
